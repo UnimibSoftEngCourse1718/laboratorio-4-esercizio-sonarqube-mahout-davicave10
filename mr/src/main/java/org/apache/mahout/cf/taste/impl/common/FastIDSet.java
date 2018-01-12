@@ -294,7 +294,7 @@ public final class FastIDSet implements Serializable, Cloneable, Iterable<Long> 
   @Override
   public int hashCode() {
     int hash = 0;
-    long[] keysID = this.keysID;
+    long[] keysID = this.keys;
     for (long key : keysID) {
       if (key != NULL && key != REMOVED) {
         hash = 31 * hash + ((int) (key >> 32) ^ (int) key);

@@ -53,7 +53,8 @@ public class RepresentativePointsReducer
         mdp = new WeightedVectorWritable(dpw.getWeight(), dpw.getVector());
       }
     }
-    context.write(new IntWritable(key.get()), new VectorWritable(mdp.getVector()));
+    if(mdp!=null)
+    	context.write(new IntWritable(key.get()), new VectorWritable(mdp.getVector()));
   }
 
   @Override
