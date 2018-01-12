@@ -70,22 +70,26 @@ public final class BookCrossingDataModel extends FileDataModel {
       writer = new OutputStreamWriter(new FileOutputStream(resultFile), Charsets.UTF_8);
       for (String line : new FileLineIterable(originalFile, true)) {
         // 0 ratings are basically "no rating", ignore them (thanks h.9000)
-        if (line.endsWith("\"0\"")) {
-          continue;
-        }
-        // Delete replace anything that isn't numeric, or a semicolon delimiter. Make comma the delimiter.
-        String convertedLine = NON_DIGIT_SEMICOLON_PATTERN.matcher(line)
-            .replaceAll("").replace(';', ',');
-        // If this means we deleted an entire ID -- few cases like that -- skip the line
-        if (convertedLine.contains(",,")) {
-          continue;
-        }
-        if (ignoreRatings) {
-          // drop rating
-          convertedLine = convertedLine.substring(0, convertedLine.lastIndexOf(','));
-        }
-        writer.write(convertedLine);
-        writer.write('\n');
+        if (!(line.endsWith("\"0\""))) {
+          
+	        // Delete replace anything that isn't numeric, or a semicolon delimiter. Make comma the delimiter.
+	        String convertedLine = NON_DIGIT_SEMICOLON_PATTERN.matcher(line)
+	            .replaceAll("").replace(';', ',');
+	        // If this means we deleted an entire ID -- few cases like that -- skip the line
+	        if (!(convertedLine.contains(",,"))) 
+	        {
+	          
+	        
+		        if (ignoreRatings) {
+		          // drop rating
+		          convertedLine = convertedLine.substring(0, convertedLine.lastIndexOf(','));
+		        }
+		        writer.write(convertedLine);
+		        writer.write('\n');
+		        
+	        }
+	    }
+        
       }
       writer.flush();
     } catch (IOException ioe) {
